@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "435588495760",
+    "project_id": "lab-manajemen-sekolah",
+    "storage_bucket": "lab-manajemen-sekolah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435588495760:android:2b277fa86c1d1a79d29b15",
+        "android_client_info": {
+          "package_name": "com.example.lab_manajemen_sekolah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVFmVLkBD7PePuHoZPBGULXCAn4OUT0zU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
