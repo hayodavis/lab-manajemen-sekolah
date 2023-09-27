@@ -7,6 +7,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const ADD_INVENTORY = _Paths.ADD_INVENTORY;
+  static const DETAIL_INVENTORY = _Paths.DETAIL_INVENTORY;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const ADD_INVENTORY = '/add-inventory';
+  static const DETAIL_INVENTORY = '/detail-inventory';
 }

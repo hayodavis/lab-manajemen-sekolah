@@ -219,6 +219,21 @@ class HomeView extends GetView<HomeController> {
                                       //         "${todoData["description"]}",
                                       //   },
                                       // ),
+                                      Get.toNamed(Routes.DETAIL_INVENTORY,
+                                          arguments: {
+                                            "id":
+                                                "${inventoryData["inventory_id"]}",
+                                            "title":
+                                                "${inventoryData["title"]}",
+                                            "spesification":
+                                                "${inventoryData["spesification"]}",
+                                            "kondisi":
+                                                "${inventoryData["kondisi"]}",
+                                            "lokasi":
+                                                "${inventoryData["lokasi"]}",
+                                            "image":
+                                                "${inventoryData["image"]}",
+                                          }),
                                     },
                                     borderRadius: BorderRadius.circular(8),
                                     child: Container(
