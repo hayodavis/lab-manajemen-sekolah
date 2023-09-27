@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+
+import '../modules/add_inventory/bindings/add_inventory_binding.dart';
+import '../modules/add_inventory/views/add_inventory_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -28,6 +31,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_INVENTORY,
+      page: () => const AddInventoryView(),
+      binding: AddInventoryBinding(),
     ),
   ];
 }

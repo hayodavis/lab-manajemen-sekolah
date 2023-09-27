@@ -171,7 +171,7 @@ class HomeView extends GetView<HomeController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "List Todo Terbaru",
+                            "List Inventaris Terbaru",
                             style: TextStyle(
                               fontFamily: "poppins",
                               fontWeight: FontWeight.w600,
@@ -274,7 +274,7 @@ class HomeView extends GetView<HomeController> {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //Get.toNamed(Routes.ADD_TODO);
+          Get.toNamed(Routes.ADD_INVENTORY);
         },
         child: Icon(
           Icons.add,
