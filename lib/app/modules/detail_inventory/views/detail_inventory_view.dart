@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
+import 'package:lab_manajemen_sekolah/app/routes/app_pages.dart';
 
 import '../../../utils/app_color.dart';
 import '../../../widgets/custom_input.dart';
@@ -27,7 +28,8 @@ class DetailInventoryView extends GetView<DetailInventoryController> {
         actions: [
           TextButton(
             onPressed: () {
-              //Get.toNamed(Routes.EDIT_TODO, arguments: controller.argsData);
+              Get.toNamed(Routes.EDIT_INVENTORY,
+                  arguments: controller.argsData);
             },
             child: Text('Edit'),
             style: TextButton.styleFrom(

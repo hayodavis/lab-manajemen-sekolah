@@ -4,6 +4,8 @@ import '../modules/add_inventory/bindings/add_inventory_binding.dart';
 import '../modules/add_inventory/views/add_inventory_view.dart';
 import '../modules/detail_inventory/bindings/detail_inventory_binding.dart';
 import '../modules/detail_inventory/views/detail_inventory_view.dart';
+import '../modules/edit_inventory/bindings/edit_inventory_binding.dart';
+import '../modules/edit_inventory/views/edit_inventory_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.DETAIL_INVENTORY,
       page: () => const DetailInventoryView(),
       binding: DetailInventoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_INVENTORY,
+      page: () => const EditInventoryView(),
+      binding: EditInventoryBinding(),
     ),
   ];
 }
