@@ -78,7 +78,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     // section 2 -  card
                     StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: controller.streamTodo().asBroadcastStream(),
+                      stream: controller.streamInventory().asBroadcastStream(),
                       builder: (context, snapshot) {
                         // #TODO: make skeleton
                         switch (snapshot.connectionState) {
@@ -104,17 +104,17 @@ class HomeView extends GetView<HomeController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // job
-                                  Text(
-                                    user["email"],
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  // Text(
+                                  //   user["email"],
+                                  //   style: TextStyle(
+                                  //     color: Colors.white,
+                                  //     fontFamily: 'poppins',
+                                  //     fontWeight: FontWeight.w500,
+                                  //   ),
+                                  // ),
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
                                   Container(
                                     width: MediaQuery.of(context).size.width,
                                     padding: EdgeInsets.symmetric(
@@ -134,7 +134,7 @@ class HomeView extends GetView<HomeController> {
                                                 margin:
                                                     EdgeInsets.only(bottom: 6),
                                                 child: Text(
-                                                  "Jumlah Todo",
+                                                  "Jumlah Inventaris",
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.white,
@@ -189,7 +189,9 @@ class HomeView extends GetView<HomeController> {
                     ),
 
                     StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                        stream: controller.streamLastTodo().asBroadcastStream(),
+                        stream: controller
+                            .streamLastInventory()
+                            .asBroadcastStream(),
                         builder: (context, snapshot) {
                           switch (snapshot.connectionState) {
                             case ConnectionState.waiting:
@@ -205,7 +207,7 @@ class HomeView extends GetView<HomeController> {
                                 separatorBuilder: (context, index) =>
                                     SizedBox(height: 16),
                                 itemBuilder: (context, index) {
-                                  var todoData = listResults[index].data();
+                                  var inventoryData = listResults[index].data();
                                   return InkWell(
                                     onTap: () => {
                                       // Get.toNamed(
@@ -235,21 +237,40 @@ class HomeView extends GetView<HomeController> {
                                           bottom: 20),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.start,
                                         children: [
+                                          Image.network(
+                                            inventoryData["image"],
+                                            width: 50,
+                                          ),
+                                          SizedBox(width: 24),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                (todoData["title"] == null)
+                                                (inventoryData["title"] == null)
                                                     ? "-"
-                                                    : "${todoData["title"]}",
-                                                style: TextStyle(fontSize: 12),
+                                                    : "${inventoryData["title"]}",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: AppColor.secondary,
+                                                ),
+                                              ),
+                                              SizedBox(width: 50),
+                                              Text(
+                                                "Kondisi: ${inventoryData["kondisi"]}",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: AppColor.secondarySoft,
+                                                ),
                                               ),
                                               Text(
-                                                "${todoData["created_at"]}",
-                                                style: TextStyle(fontSize: 12),
+                                                "Lokasi: ${inventoryData["lokasi"]}",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: AppColor.secondarySoft,
+                                                ),
                                               ),
                                             ],
                                           ),
