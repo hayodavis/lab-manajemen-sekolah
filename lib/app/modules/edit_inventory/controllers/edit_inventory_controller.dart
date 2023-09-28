@@ -18,7 +18,7 @@ class EditInventoryController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxBool isLoadingCreateInventory = false.obs;
-  //RxString radio = "".obs;
+  RxString radio = "".obs;
   String image = "";
   File? file;
 
@@ -37,7 +37,7 @@ class EditInventoryController extends GetxController {
     titleC.text = argsData["title"];
     specC.text = argsData["spesification"];
     lokasiC.text = argsData["lokasi"];
-    //radio = argsData["kondisi"];
+    radio.value = argsData["kondisi"];
     image = argsData["image"];
   }
 
@@ -55,9 +55,9 @@ class EditInventoryController extends GetxController {
     lokasiC.dispose();
   }
 
-  // void setRadio(value) {
-  //   radio.value = value;
-  // }
+  void setRadio(value) {
+    radio.value = value;
+  }
 
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -96,15 +96,16 @@ class EditInventoryController extends GetxController {
   editInventoryData() async {
     isLoadingCreateInventory.value = true;
     String adminEmail = auth.currentUser!.email!;
-    if (file != null) {
-      try {
-        String uid = auth.currentUser!.uid;
-        CollectionReference<Map<String, dynamic>> childrenCollection =
-            await firestore.collection("inventories");
 
-        DocumentReference inventory =
-            await firestore.collection("inventories").doc(argsData["id"]);
+    try {
+      String uid = auth.currentUser!.uid;
+      CollectionReference<Map<String, dynamic>> childrenCollection =
+          await firestore.collection("inventories");
 
+      DocumentReference inventory =
+          await firestore.collection("inventories").doc(argsData["id"]);
+
+      if (file != null) {
         String fileName = file!.path.split('/').last;
         String ext = fileName.split(".").last;
         String upDir = "image/${argsData["id"]}.$ext";
@@ -116,25 +117,30 @@ class EditInventoryController extends GetxController {
         await childrenCollection.doc(argsData["id"]).update({
           "title": titleC.text,
           "spesification": specC.text,
-          //"kondisi": radio.value,
+          "kondisi": radio.value,
           "lokasi": lokasiC.text,
           "image": downloadUrl,
         });
-
-        Get.back(); //close dialog
-        Get.back(); //close form screen
-        CustomToast.successToast('Success', 'Berhasil memperbarui inventory');
-
-        isLoadingCreateInventory.value = false;
-      } on FirebaseAuthException catch (e) {
-        isLoadingCreateInventory.value = false;
-        CustomToast.errorToast('Error', 'error : ${e.code}');
-      } catch (e) {
-        isLoadingCreateInventory.value = false;
-        CustomToast.errorToast('Error', 'error : ${e.toString()}');
+      } else {
+        await childrenCollection.doc(argsData["id"]).update({
+          "title": titleC.text,
+          "spesification": specC.text,
+          "kondisi": radio.value,
+          "lokasi": lokasiC.text,
+        });
       }
-    } else {
-      CustomToast.errorToast('Error', 'gambar tidak boleh kosong !!');
+
+      Get.back(); //close dialog
+      Get.back(); //close form screen
+      CustomToast.successToast('Success', 'Berhasil memperbarui inventory');
+
+      isLoadingCreateInventory.value = false;
+    } on FirebaseAuthException catch (e) {
+      isLoadingCreateInventory.value = false;
+      CustomToast.errorToast('Error', 'error : ${e.code}');
+    } catch (e) {
+      isLoadingCreateInventory.value = false;
+      CustomToast.errorToast('Error', 'error : ${e.toString()}');
     }
   }
 }

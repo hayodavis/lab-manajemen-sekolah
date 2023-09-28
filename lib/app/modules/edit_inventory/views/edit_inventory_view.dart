@@ -61,56 +61,56 @@ class EditInventoryView extends GetView<EditInventoryController> {
                 color: AppColor.secondarySoft,
               ),
             ),
-            // Obx(() => Column(
-            //       children: [
-            //         Row(
-            //           children: [
-            //             Radio(
-            //               value: "Normal",
-            //               groupValue: controller.radio.value,
-            //               onChanged: (value) => controller.setRadio(value),
-            //             ),
-            //             Text(
-            //               "Normal",
-            //               style: TextStyle(
-            //                 fontSize: 14,
-            //                 fontFamily: 'poppins',
-            //                 fontWeight: FontWeight.w500,
-            //                 color: AppColor.secondarySoft,
-            //               ),
-            //             ),
-            //             Radio(
-            //               value: "Dalam Perbaikan",
-            //               groupValue: controller.radio.value,
-            //               onChanged: (value) => controller.setRadio(value),
-            //             ),
-            //             Text(
-            //               "Dalam Perbaikan",
-            //               style: TextStyle(
-            //                 fontSize: 14,
-            //                 fontFamily: 'poppins',
-            //                 fontWeight: FontWeight.w500,
-            //                 color: AppColor.secondarySoft,
-            //               ),
-            //             ),
-            //             Radio(
-            //               value: "Rusak",
-            //               groupValue: controller.radio.value,
-            //               onChanged: (value) => controller.setRadio(value),
-            //             ),
-            //             Text(
-            //               "Rusak",
-            //               style: TextStyle(
-            //                 fontSize: 14,
-            //                 fontFamily: 'poppins',
-            //                 fontWeight: FontWeight.w500,
-            //                 color: AppColor.secondarySoft,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ],
-            //     )),
+            Obx(() => Column(
+                  children: [
+                    Row(
+                      children: [
+                        Radio(
+                          value: "Normal",
+                          groupValue: controller.radio.value,
+                          onChanged: (value) => controller.setRadio(value),
+                        ),
+                        Text(
+                          "Normal",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'poppins',
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.secondarySoft,
+                          ),
+                        ),
+                        Radio(
+                          value: "Dalam Perbaikan",
+                          groupValue: controller.radio.value,
+                          onChanged: (value) => controller.setRadio(value),
+                        ),
+                        Text(
+                          "Dalam Perbaikan",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'poppins',
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.secondarySoft,
+                          ),
+                        ),
+                        Radio(
+                          value: "Rusak",
+                          groupValue: controller.radio.value,
+                          onChanged: (value) => controller.setRadio(value),
+                        ),
+                        Text(
+                          "Rusak",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'poppins',
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.secondarySoft,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
             CustomInput(
               controller: controller.lokasiC,
               label: 'Lokasi:',
