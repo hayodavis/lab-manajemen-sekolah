@@ -132,7 +132,7 @@ class EditInventoryController extends GetxController {
 
       Get.back(); //close dialog
       Get.back(); //close form screen
-      CustomToast.successToast('Success', 'Berhasil memperbarui inventory');
+      CustomToast.successToast('Success', 'Berhasil memperbarui inventoris');
 
       isLoadingCreateInventory.value = false;
     } on FirebaseAuthException catch (e) {

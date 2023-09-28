@@ -15,7 +15,7 @@ class DetailInventoryView extends GetView<DetailInventoryController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Detail Inventory',
+          'Detail Inventaris',
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -84,10 +84,10 @@ class DetailInventoryView extends GetView<DetailInventoryController> {
           ),
           ElevatedButton(
             onPressed: () {
-              //controller.deleteTodo();
+              controller.deleteInventory();
             },
             child: Text(
-              'Delete todo',
+              'Delete Inventaris',
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: 'poppins',

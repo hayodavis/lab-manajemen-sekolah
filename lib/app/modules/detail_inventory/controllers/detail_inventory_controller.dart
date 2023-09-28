@@ -50,30 +50,29 @@ class DetailInventoryController extends GetxController {
 
   void increment() => count.value++;
 
-  // Future<void> deleteTodo() async {
-  //   CustomAlertDialog.showPresenceAlert(
-  //     title: "Hapus data todo",
-  //     message: "Apakah anda ingin menghapus data todo ini ?",
-  //     onCancel: () => Get.back(),
-  //     onConfirm: () async {
-  //       Get.back(); // close modal
-  //       Get.back(); // back page
-  //       try {
-  //         await firebaseStorage.refFromURL(image).delete();
+  Future<void> deleteInventory() async {
+    CustomAlertDialog.showPresenceAlert(
+      title: "Hapus data inventaris",
+      message: "Apakah anda ingin menghapus data inventaris ini ?",
+      onCancel: () => Get.back(),
+      onConfirm: () async {
+        Get.back(); // close modal
+        Get.back(); // back page
+        try {
+          await firebaseStorage.refFromURL(image).delete();
 
-  //         String uid = auth.currentUser!.uid;
-  //         await firestore
-  //             .collection('users')
-  //             .doc(uid)
-  //             .collection('todos')
-  //             .doc(argsData['id'])
-  //             .delete();
-  //         CustomToast.successToast('Success', 'Data todo berhasil dihapus');
-  //       } catch (e) {
-  //         CustomToast.errorToast(
-  //             "Error", "Error dikarenakan : ${e.toString()}");
-  //       }
-  //     },
-  //   );
-  // }
+          String uid = auth.currentUser!.uid;
+          await firestore
+              .collection('inventories')
+              .doc(argsData['id'])
+              .delete();
+          CustomToast.successToast(
+              'Success', 'Data inventaris berhasil dihapus');
+        } catch (e) {
+          CustomToast.errorToast(
+              "Error", "Error dikarenakan : ${e.toString()}");
+        }
+      },
+    );
+  }
 }
