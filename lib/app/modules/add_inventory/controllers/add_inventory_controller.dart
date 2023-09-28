@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
@@ -51,6 +52,24 @@ class AddInventoryController extends GetxController {
 
   void setRadio(value) {
     radio.value = value;
+  }
+
+  String setKodeInventaris() {
+    Set<String> kodeInventarisUnik = Set<String>();
+    String namaInventaris = titleC.text;
+
+    String namaInventarisTanpaSpasi = namaInventaris.replaceAll(' ', '');
+
+    while (true) {
+      int angkaAcak = Random().nextInt(10000);
+      String kodeInventaris = "$namaInventarisTanpaSpasi#$angkaAcak";
+
+      if (!kodeInventarisUnik.contains(kodeInventaris)) {
+        kodeInventarisUnik.add(kodeInventaris);
+        return kodeInventaris;
+        break;
+      }
+    }
   }
 
   void pickFile() async {
@@ -108,6 +127,7 @@ class AddInventoryController extends GetxController {
         await inventories.doc(uuidInventory).set({
           "inventory_id": uuidInventory,
           "title": titleC.text,
+          "kode_inventaris": setKodeInventaris(),
           "spesification": specC.text,
           "kondisi": radio.value,
           "lokasi": lokasiC.text,
