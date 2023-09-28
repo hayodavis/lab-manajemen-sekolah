@@ -15,7 +15,7 @@ class AddInventoryController extends GetxController {
 
   final count = 0.obs;
   RxBool isLoading = false.obs;
-  RxBool isLoadingCreateTodo = false.obs;
+  RxBool isLoadingCreateInventory = false.obs;
   RxString radio = "Normal".obs;
 
   TextEditingController titleC = TextEditingController();
@@ -71,14 +71,14 @@ class AddInventoryController extends GetxController {
     });
   }
 
-  Future<void> addTodo() async {
+  Future<void> addInventory() async {
     if (titleC.text.isNotEmpty &&
         specC.text.isNotEmpty &&
         lokasiC.text.isNotEmpty) {
       isLoading.value = true;
 
-      if (isLoadingCreateTodo.isFalse) {
-        await createTodoData();
+      if (isLoadingCreateInventory.isFalse) {
+        await createInventoryData();
         isLoading.value = false;
       }
     } else {
@@ -87,8 +87,8 @@ class AddInventoryController extends GetxController {
     }
   }
 
-  createTodoData() async {
-    isLoadingCreateTodo.value = true;
+  createInventoryData() async {
+    isLoadingCreateInventory.value = true;
     String adminEmail = auth.currentUser!.email!;
     if (file != null) {
       try {
@@ -119,12 +119,12 @@ class AddInventoryController extends GetxController {
         Get.back(); //close form screen
         CustomToast.successToast('Success', 'Berhasil menambahkan inventaris');
 
-        isLoadingCreateTodo.value = false;
+        isLoadingCreateInventory.value = false;
       } on FirebaseAuthException catch (e) {
-        isLoadingCreateTodo.value = false;
+        isLoadingCreateInventory.value = false;
         CustomToast.errorToast('Error', 'error : ${e.code}');
       } catch (e) {
-        isLoadingCreateTodo.value = false;
+        isLoadingCreateInventory.value = false;
         CustomToast.errorToast('Error', 'error : ${e.toString()}');
       }
     } else {

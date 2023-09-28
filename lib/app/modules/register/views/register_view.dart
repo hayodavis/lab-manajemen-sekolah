@@ -47,7 +47,7 @@ class RegisterView extends GetView<RegisterController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "TODO App",
+                  "Lab Manajemen Sekolah",
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,

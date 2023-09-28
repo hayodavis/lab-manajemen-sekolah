@@ -86,7 +86,8 @@ class HomeView extends GetView<HomeController> {
                             return Center(child: CircularProgressIndicator());
                           case ConnectionState.active:
                           case ConnectionState.done:
-                            var todoLengthData = snapshot.data?.docs.length;
+                            var inventoryLengthData =
+                                snapshot.data?.docs.length;
                             return Container(
                               width: MediaQuery.of(context).size.width,
                               padding: EdgeInsets.only(
@@ -142,7 +143,7 @@ class HomeView extends GetView<HomeController> {
                                                 ),
                                               ),
                                               Text(
-                                                "${todoLengthData.toString()}",
+                                                "${inventoryLengthData.toString()}",
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w700,
@@ -178,7 +179,7 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ),
                           // TextButton(
-                          //   onPressed: () => Get.toNamed(Routes.ALL_TODO),
+                          //   onPressed: () => Get.toNamed(Routes.ALL_Inventory),
                           //   child: Text("tampilkan semua"),
                           //   style: TextButton.styleFrom(
                           //     primary: AppColor.primary,
@@ -210,15 +211,6 @@ class HomeView extends GetView<HomeController> {
                                   var inventoryData = listResults[index].data();
                                   return InkWell(
                                     onTap: () => {
-                                      // Get.toNamed(
-                                      //   //Routes.DETAIL_TODO,
-                                      //   arguments: {
-                                      //     "id": "${todoData["task_id"]}",
-                                      //     "title": "${todoData["title"]}",
-                                      //     "description":
-                                      //         "${todoData["description"]}",
-                                      //   },
-                                      // ),
                                       Get.toNamed(Routes.DETAIL_INVENTORY,
                                           arguments: {
                                             "id":

@@ -176,7 +176,7 @@ class AddInventoryView extends GetView<AddInventoryController> {
                 () => ElevatedButton(
                   onPressed: () {
                     if (controller.isLoading.isFalse) {
-                      controller.addTodo();
+                      controller.addInventory();
                     }
                   },
                   child: Text(
