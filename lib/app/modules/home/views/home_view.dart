@@ -193,6 +193,30 @@ class HomeView extends GetView<HomeController> {
                           ],
                         ),
                       ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                                child: CustomInput(
+                              controller: controller.searchC,
+                              hint: "Cari Inventaris",
+                              label: "Pencarian",
+                            )),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            ElevatedButton(
+                                onPressed: () => controller.search(),
+                                child: Icon(Icons.search)),
+                            SizedBox(width: 8),
+                            ElevatedButton(
+                                onPressed: () => {controller.scanQr()},
+                                child: Icon(Icons.qr_code_scanner))
+                          ],
+                        ),
+                      ),
                       // SizedBox(height: 20),
                       // Container(
                       //   child: Row(
@@ -214,37 +238,6 @@ class HomeView extends GetView<HomeController> {
                       //     ],
                       //   ),
                       // ),
-                      SizedBox(height: 20),
-                      ElevatedButton(
-                          onPressed: () async {
-                            String barcode =
-                                await FlutterBarcodeScanner.scanBarcode(
-                              "#000000",
-                              "CANCEL",
-                              true,
-                              ScanMode.QR,
-                            );
-                            Map<String, dynamic> hasil =
-                                await controller.getInvetoryById(barcode);
-                            if (hasil["error"] == false) {
-                              print(hasil);
-                              Get.toNamed(Routes.DETAIL_INVENTORY, arguments: {
-                                "id": "${hasil["data"]["inventory_id"]}",
-                                "title": "${hasil["data"]["title"]}",
-                                "spesification":
-                                    "${hasil["data"]["spesification"]}",
-                                "kondisi": "${hasil["data"]["kondisi"]}",
-                                "image": "${hasil["data"]["image"]}",
-                              });
-                            } else {
-                              Get.snackbar(
-                                "Error",
-                                hasil["message"],
-                                duration: const Duration(seconds: 2),
-                              );
-                            }
-                          },
-                          child: Text("Scan")),
                       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                           stream: controller
                               .streamLastInventory()

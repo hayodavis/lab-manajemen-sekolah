@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -56,11 +57,6 @@ class HomeController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamLastInventory() async* {
     String uid = auth.currentUser!.uid;
-    // yield* firestore
-    //     .collection("inventories")
-    //     .orderBy("created_at", descending: true)
-    //     .limitToLast(5)
-    //     .snapshots();
 
     if (searchC.text.isEmpty) {
       yield* firestore
@@ -68,14 +64,10 @@ class HomeController extends GetxController {
           .orderBy("created_at", descending: true)
           .snapshots();
     } else {
-      String searchText = searchC.text.trim();
-      // List<String> keywords =
-      //     searchText.split(" "); // Memisahkan kata kunci pencarian
-
       yield* firestore
           .collection("inventories")
-          // .where("title", isEqualTo: searchText)
-          .orderBy("created_at", descending: true)
+          .where("title", isGreaterThanOrEqualTo: searchC.text.trim())
+          .where("title", isLessThan: "${searchC.text.trim()}z")
           .snapshots();
     }
   }
@@ -265,5 +257,31 @@ class HomeController extends GetxController {
 
     // open pdf
     await OpenFile.open(file.path);
+  }
+
+  void scanQr() async {
+    String barcode = await FlutterBarcodeScanner.scanBarcode(
+      "#000000",
+      "CANCEL",
+      true,
+      ScanMode.QR,
+    );
+    Map<String, dynamic> hasil = await getInvetoryById(barcode);
+    if (hasil["error"] == false) {
+      print(hasil);
+      Get.toNamed(Routes.DETAIL_INVENTORY, arguments: {
+        "id": "${hasil["data"]["inventory_id"]}",
+        "title": "${hasil["data"]["title"]}",
+        "spesification": "${hasil["data"]["spesification"]}",
+        "kondisi": "${hasil["data"]["kondisi"]}",
+        "image": "${hasil["data"]["image"]}",
+      });
+    } else {
+      Get.snackbar(
+        "Error",
+        hasil["message"],
+        duration: const Duration(seconds: 2),
+      );
+    }
   }
 }
