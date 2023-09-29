@@ -6,7 +6,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:lab_manajemen_sekolah/app/modules/add_inventory/views/camera_view.dart';
 import 'package:lab_manajemen_sekolah/app/widgets/custom_toast.dart';
 import 'package:uuid/uuid.dart';
@@ -50,6 +52,33 @@ class AddInventoryController extends GetxController {
 
   void increment() => count.value++;
 
+  void cropFile() async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: file!.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        // CropAspectRatioPreset.ratio3x2,
+        // CropAspectRatioPreset.original,
+        // CropAspectRatioPreset.ratio4x3,
+        // CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+      ],
+    );
+
+    file = File(croppedFile!.path);
+    update();
+  }
+
   void setRadio(value) {
     radio.value = value;
   }
@@ -77,6 +106,7 @@ class AddInventoryController extends GetxController {
 
     if (result != null) {
       file = File(result.files.single.path ?? '');
+      cropFile();
     } else {
       // User canceled the picker
     }
@@ -86,7 +116,8 @@ class AddInventoryController extends GetxController {
   void toCamera() {
     Get.to(CameraView())!.then((result) {
       file = result;
-      update();
+      //update();
+      cropFile();
     });
   }
 

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../routes/app_pages.dart';
 import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/custom_toast.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -13,6 +14,7 @@ class HomeController extends GetxController {
   RxBool isLoading = false.obs;
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  TextEditingController searchC = TextEditingController();
 
   @override
   void onInit() {
@@ -31,6 +33,10 @@ class HomeController extends GetxController {
 
   void increment() => count.value++;
 
+  void search() {
+    update();
+  }
+
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
     String uid = auth.currentUser!.uid;
     yield* firestore.collection("users").doc(uid).snapshots();
@@ -43,11 +49,28 @@ class HomeController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamLastInventory() async* {
     String uid = auth.currentUser!.uid;
-    yield* firestore
-        .collection("inventories")
-        .orderBy("created_at", descending: true)
-        .limitToLast(5)
-        .snapshots();
+    // yield* firestore
+    //     .collection("inventories")
+    //     .orderBy("created_at", descending: true)
+    //     .limitToLast(5)
+    //     .snapshots();
+
+    if (searchC.text.isEmpty) {
+      yield* firestore
+          .collection("inventories")
+          .orderBy("created_at", descending: true)
+          .snapshots();
+    } else {
+      String searchText = searchC.text.trim();
+      // List<String> keywords =
+      //     searchText.split(" "); // Memisahkan kata kunci pencarian
+
+      yield* firestore
+          .collection("inventories")
+          // .where("title", isEqualTo: searchText)
+          .orderBy("created_at", descending: true)
+          .snapshots();
+    }
   }
 
   void logout() async {
