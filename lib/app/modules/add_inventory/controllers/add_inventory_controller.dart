@@ -23,7 +23,7 @@ class AddInventoryController extends GetxController {
 
   TextEditingController titleC = TextEditingController();
   TextEditingController specC = TextEditingController();
-  TextEditingController lokasiC = TextEditingController();
+  // TextEditingController lokasiC = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -47,7 +47,7 @@ class AddInventoryController extends GetxController {
 
     titleC.dispose();
     specC.dispose();
-    lokasiC.dispose();
+    // lokasiC.dispose();
   }
 
   void increment() => count.value++;
@@ -122,9 +122,7 @@ class AddInventoryController extends GetxController {
   }
 
   Future<void> addInventory() async {
-    if (titleC.text.isNotEmpty &&
-        specC.text.isNotEmpty &&
-        lokasiC.text.isNotEmpty) {
+    if (titleC.text.isNotEmpty && specC.text.isNotEmpty) {
       isLoading.value = true;
 
       if (isLoadingCreateInventory.isFalse) {
@@ -161,7 +159,7 @@ class AddInventoryController extends GetxController {
           "kode_inventaris": setKodeInventaris(),
           "spesification": specC.text,
           "kondisi": radio.value,
-          "lokasi": lokasiC.text,
+          // "lokasi": lokasiC.text,
           "image": downloadUrl,
           "created_at": DateTime.now().toIso8601String(),
         });

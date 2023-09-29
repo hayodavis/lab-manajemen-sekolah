@@ -111,11 +111,11 @@ class AddInventoryView extends GetView<AddInventoryController> {
                     ),
                   ],
                 )),
-            CustomInput(
-              controller: controller.lokasiC,
-              label: 'Lokasi:',
-              hint: 'Contoh: Lab RPL',
-            ),
+            // CustomInput(
+            //   controller: controller.lokasiC,
+            //   label: 'Lokasi:',
+            //   hint: 'Contoh: Lab RPL',
+            // ),
             (controller.file != null)
                 ? Image.file(controller.file!)
                 : const SizedBox(),

@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:lab_manajemen_sekolah/app/modules/home/controllers/home_controller.dart';
 import 'package:lab_manajemen_sekolah/app/routes/app_pages.dart';
 import 'package:lab_manajemen_sekolah/app/utils/app_color.dart';
 import 'package:lab_manajemen_sekolah/app/widgets/custom_input.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -181,13 +183,13 @@ class HomeView extends GetView<HomeController> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            // TextButton(
-                            //   onPressed: () => Get.toNamed(Routes.ALL_Inventory),
-                            //   child: Text("tampilkan semua"),
-                            //   style: TextButton.styleFrom(
-                            //     primary: AppColor.primary,
-                            //   ),
-                            // ),
+                            TextButton(
+                              onPressed: () => controller.downloadqr(),
+                              child: Text("Download QR Code"),
+                              style: TextButton.styleFrom(
+                                primary: AppColor.primary,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -212,6 +214,37 @@ class HomeView extends GetView<HomeController> {
                       //     ],
                       //   ),
                       // ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                          onPressed: () async {
+                            String barcode =
+                                await FlutterBarcodeScanner.scanBarcode(
+                              "#000000",
+                              "CANCEL",
+                              true,
+                              ScanMode.QR,
+                            );
+                            Map<String, dynamic> hasil =
+                                await controller.getInvetoryById(barcode);
+                            if (hasil["error"] == false) {
+                              print(hasil);
+                              Get.toNamed(Routes.DETAIL_INVENTORY, arguments: {
+                                "id": "${hasil["data"]["inventory_id"]}",
+                                "title": "${hasil["data"]["title"]}",
+                                "spesification":
+                                    "${hasil["data"]["spesification"]}",
+                                "kondisi": "${hasil["data"]["kondisi"]}",
+                                "image": "${hasil["data"]["image"]}",
+                              });
+                            } else {
+                              Get.snackbar(
+                                "Error",
+                                hasil["message"],
+                                duration: const Duration(seconds: 2),
+                              );
+                            }
+                          },
+                          child: Text("Scan")),
                       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                           stream: controller
                               .streamLastInventory()
@@ -248,8 +281,6 @@ class HomeView extends GetView<HomeController> {
                                                   "${inventoryData["spesification"]}",
                                               "kondisi":
                                                   "${inventoryData["kondisi"]}",
-                                              "lokasi":
-                                                  "${inventoryData["lokasi"]}",
                                               "image":
                                                   "${inventoryData["image"]}",
                                             }),
@@ -273,45 +304,62 @@ class HomeView extends GetView<HomeController> {
                                             bottom: 20),
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Image.network(
-                                              inventoryData["image"],
-                                              width: 50,
-                                            ),
-                                            SizedBox(width: 24),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  (inventoryData["title"] ==
-                                                          null)
-                                                      ? "-"
-                                                      : "${inventoryData["title"]}",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: AppColor.secondary,
-                                                  ),
+                                                Image.network(
+                                                  inventoryData["image"],
+                                                  width: 50,
                                                 ),
-                                                SizedBox(width: 50),
-                                                Text(
-                                                  "Kondisi: ${inventoryData["kondisi"]}",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color:
-                                                        AppColor.secondarySoft,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Lokasi: ${inventoryData["lokasi"]}",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color:
-                                                        AppColor.secondarySoft,
-                                                  ),
+                                                SizedBox(width: 24),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      (inventoryData["title"] ==
+                                                              null)
+                                                          ? "-"
+                                                          : "${inventoryData["title"]}",
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        color:
+                                                            AppColor.secondary,
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 50),
+                                                    Text(
+                                                      "Kondisi: ${inventoryData["kondisi"]}",
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: AppColor
+                                                            .secondarySoft,
+                                                      ),
+                                                    ),
+                                                    // // Text(
+                                                    // //   "Lokasi: ${inventoryData["lokasi"]}",
+                                                    // //   style: TextStyle(
+                                                    // //     fontSize: 12,
+                                                    // //     color: AppColor
+                                                    // //         .secondarySoft,
+                                                    // //   ),
+                                                    // ),
+                                                  ],
                                                 ),
                                               ],
+                                            ),
+                                            SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: QrImageView(
+                                                data: inventoryData[
+                                                    "kode_inventaris"],
+                                                size: 200.0,
+                                                version: QrVersions.auto,
+                                              ),
                                             ),
                                           ],
                                         ),

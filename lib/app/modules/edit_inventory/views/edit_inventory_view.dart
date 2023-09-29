@@ -111,11 +111,11 @@ class EditInventoryView extends GetView<EditInventoryController> {
                     ),
                   ],
                 )),
-            CustomInput(
-              controller: controller.lokasiC,
-              label: 'Lokasi:',
-              hint: 'Contoh: Lab RPL',
-            ),
+            // CustomInput(
+            //   controller: controller.lokasiC,
+            //   label: 'Lokasi:',
+            //   hint: 'Contoh: Lab RPL',
+            // ),
             (controller.file == null)
                 ? Image.network(
                     (controller.image != null)

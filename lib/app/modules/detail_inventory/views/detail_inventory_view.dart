@@ -70,12 +70,12 @@ class DetailInventoryView extends GetView<DetailInventoryController> {
             hint: 'Contoh: Corei7 RAM 8GB',
             disabled: true,
           ),
-          CustomInput(
-            controller: controller.lokasiC,
-            label: 'Lokasi:',
-            hint: 'Contoh: Aula',
-            disabled: true,
-          ),
+          // CustomInput(
+          //   controller: controller.lokasiC,
+          //   label: 'Lokasi:',
+          //   hint: 'Contoh: Aula',
+          //   disabled: true,
+          // ),
           CustomInput(
             controller: controller.kondisiC,
             label: 'Kondisi:',

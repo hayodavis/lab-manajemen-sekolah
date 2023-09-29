@@ -17,7 +17,7 @@ class DetailInventoryController extends GetxController {
 
   TextEditingController titleC = TextEditingController();
   TextEditingController specC = TextEditingController();
-  TextEditingController lokasiC = TextEditingController();
+  //TextEditingController lokasiC = TextEditingController();
   TextEditingController kondisiC = TextEditingController();
   String image = "";
 
@@ -30,7 +30,7 @@ class DetailInventoryController extends GetxController {
     super.onInit();
     titleC.text = argsData["title"];
     specC.text = argsData["spesification"];
-    lokasiC.text = argsData["lokasi"];
+    //lokasiC.text = argsData["lokasi"];
     kondisiC.text = argsData["kondisi"];
     image = argsData["image"];
   }
