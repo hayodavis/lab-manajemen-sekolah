@@ -283,6 +283,8 @@ class HomeView extends GetView<HomeController> {
                                             arguments: {
                                               "id":
                                                   "${inventoryData["inventory_id"]}",
+                                              "kode_inventaris":
+                                                  "${inventoryData["kode_inventaris"]}",
                                               "title":
                                                   "${inventoryData["title"]}",
                                               "spesification":
@@ -328,17 +330,34 @@ class HomeView extends GetView<HomeController> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      (inventoryData["title"] ==
+                                                      (inventoryData[
+                                                                  "kode_inventaris"] ==
                                                               null)
                                                           ? "-"
-                                                          : "${inventoryData["title"]}",
+                                                          : "${inventoryData["kode_inventaris"]}",
                                                       style: TextStyle(
                                                         fontSize: 12,
                                                         color:
                                                             AppColor.secondary,
                                                       ),
                                                     ),
-                                                    SizedBox(width: 50),
+                                                    SizedBox(height: 5),
+                                                    SizedBox(
+                                                      width: 150.0,
+                                                      child: Text(
+                                                        "Spesifikasi: ${inventoryData["spesification"]}",
+                                                        maxLines: 10,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        softWrap: false,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: AppColor
+                                                              .secondarySoft,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5),
                                                     Text(
                                                       "Kondisi: ${inventoryData["kondisi"]}",
                                                       style: TextStyle(

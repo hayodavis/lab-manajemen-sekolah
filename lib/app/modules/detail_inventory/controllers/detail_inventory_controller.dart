@@ -19,6 +19,7 @@ class DetailInventoryController extends GetxController {
   TextEditingController specC = TextEditingController();
   //TextEditingController lokasiC = TextEditingController();
   TextEditingController kondisiC = TextEditingController();
+  TextEditingController kodeInventarisC = TextEditingController();
   String image = "";
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -32,6 +33,7 @@ class DetailInventoryController extends GetxController {
     specC.text = argsData["spesification"];
     //lokasiC.text = argsData["lokasi"];
     kondisiC.text = argsData["kondisi"];
+    kodeInventarisC.text = argsData["kode_inventaris"];
     image = argsData["image"];
   }
 

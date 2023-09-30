@@ -59,6 +59,12 @@ class DetailInventoryView extends GetView<DetailInventoryController> {
             height: 16,
           ),
           CustomInput(
+            controller: controller.kodeInventarisC,
+            label: 'Nama:',
+            hint: 'Contoh: LaptopHP#123',
+            disabled: true,
+          ),
+          CustomInput(
             controller: controller.titleC,
             label: 'Nama:',
             hint: 'Contoh: Laptop HP',

@@ -149,7 +149,7 @@ class HomeController extends GetxController {
                 children: [
                   // No
                   pw.Padding(
-                    padding: const pw.EdgeInsets.all(20),
+                    padding: const pw.EdgeInsets.all(10),
                     child: pw.Text(
                       "${index + 1}",
                       textAlign: pw.TextAlign.center,
@@ -158,9 +158,9 @@ class HomeController extends GetxController {
                       ),
                     ),
                   ),
-                  // Kode Barang
+                  // Kode Inventaris
                   pw.Padding(
-                    padding: const pw.EdgeInsets.all(20),
+                    padding: const pw.EdgeInsets.all(10),
                     child: pw.Text(
                       item["kode_inventaris"],
                       textAlign: pw.TextAlign.center,
@@ -169,9 +169,31 @@ class HomeController extends GetxController {
                       ),
                     ),
                   ),
+                  // Spesification
+                  pw.Padding(
+                    padding: const pw.EdgeInsets.all(10),
+                    child: pw.Text(
+                      item["spesification"],
+                      textAlign: pw.TextAlign.left,
+                      style: const pw.TextStyle(
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                  // Kondisi Inventaris
+                  pw.Padding(
+                    padding: const pw.EdgeInsets.all(10),
+                    child: pw.Text(
+                      item["kondisi"],
+                      textAlign: pw.TextAlign.center,
+                      style: const pw.TextStyle(
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
                   // QR Code
                   pw.Padding(
-                    padding: const pw.EdgeInsets.all(20),
+                    padding: const pw.EdgeInsets.all(10),
                     child: pw.BarcodeWidget(
                       color: PdfColor.fromHex("#000000"),
                       barcode: pw.Barcode.qrCode(),
@@ -187,7 +209,7 @@ class HomeController extends GetxController {
           return [
             pw.Center(
               child: pw.Text(
-                "DOWNLOAD INVENTARIS",
+                "Download QR Code Inventaris",
                 textAlign: pw.TextAlign.center,
                 style: const pw.TextStyle(
                   fontSize: 24,
@@ -204,39 +226,77 @@ class HomeController extends GetxController {
                 pw.TableRow(
                   children: [
                     // No
-                    pw.Padding(
-                      padding: const pw.EdgeInsets.all(20),
-                      child: pw.Text(
-                        "No",
-                        textAlign: pw.TextAlign.center,
-                        style: pw.TextStyle(
-                          fontSize: 10,
-                          fontWeight: pw.FontWeight.bold,
+                    pw.Container(
+                      width: 70,
+                      child: pw.Padding(
+                        padding: const pw.EdgeInsets.all(10),
+                        child: pw.Text(
+                          "No",
+                          textAlign: pw.TextAlign.center,
+                          style: pw.TextStyle(
+                            fontSize: 10,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                    // Kode Barang
-                    pw.Padding(
-                      padding: const pw.EdgeInsets.all(20),
-                      child: pw.Text(
-                        "Product Code",
-                        textAlign: pw.TextAlign.center,
-                        style: pw.TextStyle(
-                          fontSize: 10,
-                          fontWeight: pw.FontWeight.bold,
+                    // Kode Inventaris
+                    pw.Container(
+                      width: 180,
+                      child: pw.Padding(
+                        padding: const pw.EdgeInsets.all(10),
+                        child: pw.Text(
+                          "Kode",
+                          textAlign: pw.TextAlign.center,
+                          style: pw.TextStyle(
+                            fontSize: 10,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-
+                    // Spesifikasi
+                    pw.Container(
+                      // width: 150,
+                      child: pw.Padding(
+                        padding: const pw.EdgeInsets.all(10),
+                        child: pw.Text(
+                          "Spesifikasi",
+                          textAlign: pw.TextAlign.center,
+                          style: pw.TextStyle(
+                            fontSize: 10,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Kondisi Inventaris
+                    pw.Container(
+                      width: 150,
+                      child: pw.Padding(
+                        padding: const pw.EdgeInsets.all(10),
+                        child: pw.Text(
+                          "Kondisi",
+                          textAlign: pw.TextAlign.center,
+                          style: pw.TextStyle(
+                            fontSize: 10,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                     // QR Code
-                    pw.Padding(
-                      padding: const pw.EdgeInsets.all(20),
-                      child: pw.Text(
-                        "QR Code",
-                        textAlign: pw.TextAlign.center,
-                        style: pw.TextStyle(
-                          fontSize: 10,
-                          fontWeight: pw.FontWeight.bold,
+                    pw.Container(
+                      width: 150,
+                      child: pw.Padding(
+                        padding: const pw.EdgeInsets.all(10),
+                        child: pw.Text(
+                          "QR Code",
+                          textAlign: pw.TextAlign.center,
+                          style: pw.TextStyle(
+                            fontSize: 10,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
