@@ -38,7 +38,7 @@ class RegisterView extends GetView<RegisterController> {
             decoration: BoxDecoration(
               gradient: AppColor.primaryGradient,
               image: DecorationImage(
-                image: AssetImage('assets/images/pattern-1-1.png'),
+                image: AssetImage('assets/images/coverlogin.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -58,7 +58,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "by Hummasoft",
+                  "by Davis - SMKN 2 Bangkalan",
                   style: TextStyle(color: Colors.white),
                 ),
               ],

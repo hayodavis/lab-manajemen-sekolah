@@ -58,18 +58,23 @@ class HomeController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> streamLastInventory() async* {
     String uid = auth.currentUser!.uid;
 
-    if (searchC.text.isEmpty) {
-      yield* firestore
-          .collection("inventories")
-          .orderBy("created_at", descending: true)
-          .snapshots();
-    } else {
-      yield* firestore
-          .collection("inventories")
-          .where("title", isGreaterThanOrEqualTo: searchC.text.trim())
-          .where("title", isLessThan: "${searchC.text.trim()}z")
-          .snapshots();
-    }
+    yield* firestore
+        .collection("inventories")
+        .orderBy("created_at", descending: true)
+        .snapshots();
+
+    // if (searchC.text.isEmpty) {
+    //   yield* firestore
+    //       .collection("inventories")
+    //       .orderBy("created_at", descending: true)
+    //       .snapshots();
+    // } else {
+    //   yield* firestore
+    //       .collection("inventories")
+    //       .where("title", isGreaterThanOrEqualTo: searchC.text.trim())
+    //       .where("title", isLessThan: "${searchC.text.trim()}z")
+    //       .snapshots();
+    // }
   }
 
   void logout() async {

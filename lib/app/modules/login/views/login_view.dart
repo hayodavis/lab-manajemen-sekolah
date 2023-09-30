@@ -49,7 +49,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "by Kelompok 5 BOE",
+                  "by Davis - SMKN 2 Bangkalan",
                   style: TextStyle(color: Colors.white),
                 ),
               ],
