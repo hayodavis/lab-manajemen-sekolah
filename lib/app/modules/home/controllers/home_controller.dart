@@ -61,6 +61,7 @@ class HomeController extends GetxController {
     yield* firestore
         .collection("inventories")
         .orderBy("created_at", descending: true)
+        .limit(5)
         .snapshots();
 
     // if (searchC.text.isEmpty) {

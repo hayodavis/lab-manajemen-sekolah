@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:lab_manajemen_sekolah/app/modules/add_inventory/views/camera_view.dart';
 
 import '../../../widgets/custom_toast.dart';
@@ -57,6 +58,33 @@ class EditInventoryController extends GetxController {
 
   void setRadio(value) {
     radio.value = value;
+  }
+
+  void cropFile() async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: file!.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+      ],
+    );
+
+    file = File(croppedFile!.path);
+    update();
   }
 
   void pickFile() async {
